@@ -1,9 +1,12 @@
 import os
 import json
-from flask import Flask, render_template, request  #imports the Flask class
+from flask import Flask, render_template, request, flash  #imports the Flask class
+if os.path.exists("env.py"):
+    import env
 
-app = Flask (__name__) #creates an instance of the class Flask (capital letter denotes a class) and stores it in a vraiabe (app)
-                        # uses a default python variable __name__ Flask needs this to find templates and static files
+app = Flask (__name__)   #creates an instance of the class Flask (capital letter denotes a class) and stores it in a vraiabe (app)  # uses a default python variable __name__ Flask needs this to find templates and static files
+app.secret_key = os.environ.get("SECRET_KEY")                   
+
 
 @app.route("/") #this is a function decorator. / is used so that when we browse to the root directory the functionality id triggered
 def index():
@@ -32,7 +35,7 @@ def about_member(member_name):
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        print(request.form["email"])
+       flash("Thanks {}, we have received your message".format(request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
