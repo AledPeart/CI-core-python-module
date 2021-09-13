@@ -4,11 +4,11 @@ from flask import Flask, render_template, request, flash  #imports the Flask cla
 if os.path.exists("env.py"):
     import env
 
-app = Flask (__name__)   #creates an instance of the class Flask (capital letter denotes a class) and stores it in a vraiabe (app)  # uses a default python variable __name__ Flask needs this to find templates and static files
-app.secret_key = os.environ.get("SECRET_KEY")                   
+app = Flask (__name__)  #creates an instance of the class Flask (capital letter denotes a class) and stores it in a vraiabe (app)  # uses a default python variable __name__ Flask needs this to find templates and static files
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
-@app.route("/") #this is a function decorator. / is used so that when we browse to the root directory the functionality id triggered
+@app.route("/")  #this is a function decorator. / is used so that when we browse to the root directory the functionality id triggered
 def index():
     return render_template("index.html")
 
@@ -48,9 +48,7 @@ def careers():
 
 if __name__ == "__main__":
     app.run(
-        host = os.environ.get("IP", "0.0.0.0"),
-        port = int(os.environ.get("Port", "5000")),
-        debug = True) #this allows us to see Python errors but should NEVR be used in a pridcution environment due to security reasons
-    
-
-
+        host=os.environ.get("IP", "0.0.0.0"),
+        port=int(os.environ.get("PORT", "5000")),
+        debug=True)  #this allows us to see Python errors but should NEVR be used in a pridcution environment due to security reasons
+        
